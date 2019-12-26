@@ -1,9 +1,12 @@
-package com.prajwal.restaurant;
+package com.prajwal.restaurant.ui.gallery;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.prajwal.restaurant.R;
+import com.prajwal.restaurant.ui.gallery.GalleryFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,8 +26,9 @@ public class Add_Detail extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(), GalleryFragment.class);
+                startActivity(intent);
+
             }
         });
     }
