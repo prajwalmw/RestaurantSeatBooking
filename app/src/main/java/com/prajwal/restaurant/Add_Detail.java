@@ -1,4 +1,4 @@
-package com.prajwal.restaurant.ui.gallery;
+package com.prajwal.restaurant;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +26,7 @@ public class Add_Detail extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), GalleryFragment.class);
+                Intent intent = new Intent(Add_Detail.this, GalleryFragment.class);
                 startActivity(intent);
 
             }
