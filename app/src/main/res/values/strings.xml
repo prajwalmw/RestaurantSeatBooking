@@ -13,5 +13,5 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
-    <string name="title_activity_add__detail">Add_Detail</string>
+    <string name="title_activity_add__detail">Add Details</string>
 </resources>

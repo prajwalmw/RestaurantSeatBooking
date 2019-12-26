@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.prajwal.restaurant.Add_Detail;
 import com.prajwal.restaurant.R;
 
 public class HomeFragment extends Fragment {
@@ -37,7 +38,9 @@ public class HomeFragment extends Fragment {
         book_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Intent intent = new Intent(this, )
+                Intent intent = new Intent(getContext(), Add_Detail.class);
+                startActivity(intent);
+
             }
         });
         return root;
