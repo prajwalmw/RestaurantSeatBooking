@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.prajwal.restaurant.ui.gallery.Add_Detail;
+import com.prajwal.restaurant.Add_Detail;
 import com.prajwal.restaurant.R;
 
 public class HomeFragment extends Fragment {

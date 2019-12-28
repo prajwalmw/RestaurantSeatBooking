@@ -1,10 +1,10 @@
-package com.prajwal.restaurant.ui.gallery;
+package com.prajwal.restaurant;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.prajwal.restaurant.R;
+import com.prajwal.restaurant.ui.gallery.GalleryFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;

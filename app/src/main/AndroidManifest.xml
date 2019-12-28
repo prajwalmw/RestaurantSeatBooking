@@ -22,7 +22,7 @@
             android:label="@string/title_activity_edit__detail"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".ui.gallery.Add_Detail"
+            android:name=".Add_Detail"
             android:label="@string/title_activity_add__detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
