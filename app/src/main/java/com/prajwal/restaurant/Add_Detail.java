@@ -24,7 +24,7 @@ public class Add_Detail extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Add_Detail.this, GalleryFragment.class);
+                Intent intent = new Intent(Add_Detail.this, Gallery_Frag.class);
                 startActivity(intent);
 
             }
