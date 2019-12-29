@@ -1,12 +1,18 @@
 package com.prajwal.restaurant;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -25,6 +31,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Arrays;
@@ -35,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseauth;
     private FirebaseAuth.AuthStateListener statelistener;
     public static final int RC_SIGN_IN = 1;
+    View headerview;
+    TextView text_username, text_email;
+    ImageView image_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +65,23 @@ public class MainActivity extends AppCompatActivity {
 
                 if(user != null)
                 {
-                    //sign-in
-                    // Toast.makeText(getApplicationContext(), "You're now signed in. Rent It !", Toast.LENGTH_LONG).show();
+                    text_username.setText(firebaseauth.getCurrentUser().getDisplayName());//username of logged in user.
+
+
+                    text_email.setText(firebaseauth.getCurrentUser().getEmail());//email id of logged in user.
+
+
+                    Glide.with(getApplicationContext())
+                            .load(firebaseauth.getCurrentUser().getPhotoUrl()).asBitmap().error(R.drawable.restaurant)   //asbitmap after load always.
+                            .into(new SimpleTarget<Bitmap>() {
+                                @Override
+                                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                    image_user.setImageBitmap(resource);
+                                }
+                            });
+
+
+                    Log.d("text","Nav : "+text_username);
                 }
                 else
                 {
@@ -76,10 +102,14 @@ public class MainActivity extends AppCompatActivity {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        headerview = navigationView.getHeaderView(0);
+        text_username = (TextView) headerview.findViewById(R.id.textview_username);
+        text_email = (TextView) headerview.findViewById(R.id.textView_emailid);
+        image_user = (ImageView) headerview.findViewById(R.id.imageView_userimage);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
+                R.id.nav_home, R.id.nav_profile, R.id.nav_gallery, R.id.nav_slideshow,
                 R.id.nav_tools, R.id.nav_share, R.id.nav_send)
                 .setDrawerLayout(drawer)
                 .build();
@@ -95,6 +125,23 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
 
             if (resultCode == RESULT_OK) {
+                text_username.setText(firebaseauth.getCurrentUser().getDisplayName());//username of logged in user.
+
+
+                text_email.setText(firebaseauth.getCurrentUser().getEmail());//email id of logged in user.
+
+
+                Glide.with(getApplicationContext())
+                        .load(firebaseauth.getCurrentUser().getPhotoUrl()).asBitmap().error(R.drawable.restaurant)   //asbitmap after load always.
+                        .into(new SimpleTarget<Bitmap>() {
+                            @Override
+                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                image_user.setImageBitmap(resource);
+                            }
+                        });
+
+
+                Log.d("text","Nav : "+text_username);
                 Toast.makeText(this, "You're now signed in", Toast.LENGTH_SHORT).show();
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "Sign in canceled", Toast.LENGTH_SHORT).show();
@@ -123,6 +170,22 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            AuthUI.getInstance().signOut(this);
+            Toast.makeText(this, "Visit Again", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

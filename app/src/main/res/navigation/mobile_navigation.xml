@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.prajwal.restaurant.ui.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/profile_fragment" />
+
+    <fragment
         android:id="@+id/nav_gallery"
         android:name="com.prajwal.restaurant.ui.gallery.BookingFragment"
         android:label="@string/menu_gallery"
