@@ -94,14 +94,36 @@ public class Add_Detail extends AppCompatActivity {
 
                 Log.d("TAG","email is "+email);
 
-                if("prajwal@intelehealth.io".equalsIgnoreCase(email))
+                if("prajwal@intelehealth.io".equalsIgnoreCase(email) && name.getText().toString().equals("") && phone.getText().toString().equals("")
+                        && seats.getText().toString().equals("") && !available_seats.getText().toString().equals("")  && !sharedPrefs.getString("available","").equalsIgnoreCase(available_seats.getText().toString()))
                 {
                     editor_user.putString("available",available_seats.getText().toString());
                     editor_user.apply();
                     String avai = sharedPrefs.getString("available","no available");
                     finish();
                     Log.d("AVAI","AVAI: "+avai);
+                    Toast.makeText(getApplicationContext(), "Edit Successful!", Toast.LENGTH_SHORT).show();
+                    //insertData();
+                }
+
+                else if("prajwal@intelehealth.io".equalsIgnoreCase(email) && !name.getText().toString().equals("") && !phone.getText().toString().equals("")
+                        && !seats.getText().toString().equals("") && !available_seats.getText().toString().equals(""))
+                {
+                    editor_user.putString("available",available_seats.getText().toString());
+                    editor_user.apply();
+                    String avai = sharedPrefs.getString("available","no available");
+                    finish();
+                    Log.d("AVAI","AVAI: "+avai);
+                    //Toast.makeText(getApplicationContext(), "Edit Successful!", Toast.LENGTH_SHORT).show();
                     insertData();
+                }
+
+                else if("prajwal@intelehealth.io".equalsIgnoreCase(email) && name.getText().toString().equals("") && phone.getText().toString().equals("")
+                        && seats.getText().toString().equals("") && !available_seats.getText().toString().equals("") && sharedPrefs.getString("available","").equalsIgnoreCase(available_seats.getText().toString()))
+                {
+                    finish();
+                    //Log.d("AVAI","AVAI: "+avai);
+                    Toast.makeText(getApplicationContext(), "Welcome Home", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
