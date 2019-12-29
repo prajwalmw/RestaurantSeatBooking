@@ -17,7 +17,7 @@
         android:textSize="20dp"
         android:layout_marginTop="3dp"
         android:text="1"
-        android:paddingRight="-40dp"
+        android:paddingHorizontal="20dp"
 
         />
 
@@ -35,6 +35,6 @@
         android:textSize="20dp"
         android:textStyle="bold"
         android:gravity="center"
-        android:paddingLeft="-50dp"/>
+        />
 
 </LinearLayout>
