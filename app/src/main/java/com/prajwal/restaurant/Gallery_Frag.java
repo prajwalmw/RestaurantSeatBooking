@@ -17,7 +17,7 @@ public class Gallery_Frag extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
-                    .add(android.R.id.content, new GalleryFragment()).commit();}
+                    .add(android.R.id.content, new GalleryFragment()).commit(); }
     }
 
 }
