@@ -36,6 +36,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), Add_Detail.class);
+                intent.putExtra("new",true);
                 startActivity(intent);
 
             }
