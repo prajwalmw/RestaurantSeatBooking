@@ -126,20 +126,25 @@
         android:layout_height="wrap_content"
         android:text="Available Seats:"
         android:textSize="20dp"
+        android:textStyle="bold"
         android:layout_margin="20dp"
         android:layout_below="@+id/linear"
         />
 
-    <TextView
-        android:id="@+id/text_b"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/available_seats"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="0"
         android:textSize="20dp"
-        android:layout_margin="20dp"
         android:layout_below="@+id/linear"
         android:layout_toRightOf="@id/text_a"
         android:layout_alignBaseline="@id/text_a"
+        android:background="@android:color/transparent"
+        android:inputType="none"
+        android:layout_marginRight="10dp"
+        android:hint="Enter Availability"
+        android:editable="false"
         />
 
 </RelativeLayout>

@@ -17,11 +17,13 @@ public class RestaurantDatabaseHelper extends SQLiteOpenHelper {
     public static final String R_NAME = "NAME";
     public static final String R_SEATS = "SEATS";
     public static final String R_CONTACT = "MOBILE_NO";
+    public static final String R_AVAILABLE = "AVAILABLE_SEATS";
 
     public static final String CREATE_RESTAURANT_DATA = "CREATE TABLE IF NOT EXISTS "+R_TABLE+"(" +
             _id + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             R_NAME + " TEXT," +
             R_SEATS + " INTEGER," +
+            R_AVAILABLE + " INTEGER," +
             R_CONTACT + " INTEGER);";
 
 
@@ -43,10 +45,16 @@ public class RestaurantDatabaseHelper extends SQLiteOpenHelper {
                 //upgrade logic from version 1 to 2
             case 2:
                 //upgrade logic from version 2 to 3
+                //sqLiteDatabase.execSQL("ALTER TABLE R_TABLE ADD COLUMN R_AVAILABLE");
             case 3:
-                //upgrade logic from version 3 to 4
+                //upgrade logic from version 2 to 3
             case 4:
-                //upgrade logic from version 4
+                //upgrade logic from version 2 to 3
+            case 5:
+                //upgrade logic from version 2 to 3
+            case 6:
+                //upgrade logic from version 2 to 3case 2:
+                //                //upgrade logic from version 2 to 3
             default:
                 throw new IllegalStateException(
                         "onUpgrade() with unknown oldVersion " + oldVersion);

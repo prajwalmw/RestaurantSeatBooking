@@ -1,6 +1,8 @@
 package com.prajwal.restaurant;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
@@ -46,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
     View headerview;
     TextView text_username, text_email;
     ImageView image_user;
+    SharedPreferences sharedPrefs;
+    SharedPreferences.Editor editor_user;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         firebaseauth = FirebaseAuth.getInstance();
-
+        sharedPrefs = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
+        editor_user = sharedPrefs.edit();
 
         //auth state listener
         statelistener = new FirebaseAuth.AuthStateListener() {
@@ -65,10 +71,19 @@ public class MainActivity extends AppCompatActivity {
 
                 if(user != null)
                 {
-                    text_username.setText(firebaseauth.getCurrentUser().getDisplayName());//username of logged in user.
+                    text_username.setText(firebaseauth.getCurrentUser().getDisplayName());
+                    //username of logged in user.
+                    editor_user.putString("username", firebaseauth.getCurrentUser().getDisplayName());
+                    editor_user.apply(); //apply is imp or else the changes wont be saved
+                    String email = sharedPrefs.getString("username","no email");
+                    Log.d("TAG","user is login"+email);
 
-
-                    text_email.setText(firebaseauth.getCurrentUser().getEmail());//email id of logged in user.
+                    text_email.setText(firebaseauth.getCurrentUser().getEmail());
+                    //email id of logged in user.
+                    editor_user.putString("email", firebaseauth.getCurrentUser().getEmail() );
+                    editor_user.apply(); //apply is imp or else the changes wont be saved
+                    String emailnew = sharedPrefs.getString("email","no email");
+                    Log.d("TAG","email is login"+emailnew);
 
 
                     Glide.with(getApplicationContext())
@@ -125,10 +140,16 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
 
             if (resultCode == RESULT_OK) {
-                text_username.setText(firebaseauth.getCurrentUser().getDisplayName());//username of logged in user.
+                text_username.setText(firebaseauth.getCurrentUser().getDisplayName());
+                //username of logged in user.
+                editor_user.putString("username", firebaseauth.getCurrentUser().getDisplayName());
+                editor_user.apply(); //apply is imp or else the changes wont be saved
 
 
-                text_email.setText(firebaseauth.getCurrentUser().getEmail());//email id of logged in user.
+                text_email.setText(firebaseauth.getCurrentUser().getEmail());
+                //email id of logged in user.
+                editor_user.putString("email", firebaseauth.getCurrentUser().getEmail() );
+                editor_user.apply(); //apply is imp or else the changes wont be saved
 
 
                 Glide.with(getApplicationContext())
@@ -182,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             AuthUI.getInstance().signOut(this);
-            Toast.makeText(this, "Visit Again", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Visit Again", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
