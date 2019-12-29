@@ -1,23 +1,22 @@
 package com.prajwal.restaurant;
 
 import android.os.Bundle;
-import android.view.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentActivity;
 
-import com.prajwal.restaurant.ui.gallery.GalleryFragment;
+import com.prajwal.restaurant.ui.gallery.BookingFragment;
 
-public class Gallery_Frag extends AppCompatActivity {
+public class Booking_Fragment_Extends extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.app_bar_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
-                    .add(android.R.id.content, new GalleryFragment()).commit(); }
+                    .add(R.id.bar, new BookingFragment()).commit(); }
     }
 
 }

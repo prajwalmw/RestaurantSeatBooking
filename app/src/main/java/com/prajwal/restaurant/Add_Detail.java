@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.prajwal.restaurant.ui.gallery.GalleryFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -24,7 +23,7 @@ public class Add_Detail extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Add_Detail.this, Gallery_Frag.class);
+                Intent intent = new Intent(Add_Detail.this, Booking_Fragment_Extends.class);
                 startActivity(intent);
 
             }

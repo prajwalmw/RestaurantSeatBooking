@@ -36,7 +36,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Gallery_Frag"
+        <activity android:name=".Booking_Fragment_Extends"
             android:label="My Bookings"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
