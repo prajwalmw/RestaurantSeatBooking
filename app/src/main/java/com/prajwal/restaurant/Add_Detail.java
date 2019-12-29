@@ -142,7 +142,7 @@ public class Add_Detail extends AppCompatActivity {
     public void insertData() {
         name_text = name.getText().toString();
         phone_text = phone.getText().toString();
-        PhoneNumberUtils.formatNumber(phone_text);
+        //PhoneNumberUtils.formatNumber(phone_text);
         seats_text = seats.getText().toString();
         available_text = available_seats.getText().toString();
 
