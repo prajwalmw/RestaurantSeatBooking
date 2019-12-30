@@ -20,19 +20,19 @@
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.prajwal.restaurant.ui.gallery.BookingFragment"
-        android:label="@string/menu_gallery"
+        android:label="My Bookings"
         tools:layout="@layout/fragment_booking" />
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.prajwal.restaurant.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
+        android:label="About Us"
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
-        android:id="@+id/nav_tools"
+        android:id="@+id/nav_review"
         android:name="com.prajwal.restaurant.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
+        android:label="Review"
         tools:layout="@layout/fragment_tools" />
 
     <fragment
@@ -42,8 +42,7 @@
         tools:layout="@layout/fragment_share" />
 
     <fragment
-        android:id="@+id/nav_send"
+        android:id="@+id/nav_logout"
         android:name="com.prajwal.restaurant.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
+        android:label="Logout" />
 </navigation>

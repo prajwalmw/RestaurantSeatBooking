@@ -121,9 +121,26 @@ public class Add_Detail extends AppCompatActivity {
                 else if("prajwal@intelehealth.io".equalsIgnoreCase(email) && name.getText().toString().equals("") && phone.getText().toString().equals("")
                         && seats.getText().toString().equals("") && !available_seats.getText().toString().equals("") && sharedPrefs.getString("available","").equalsIgnoreCase(available_seats.getText().toString()))
                 {
-                    finish();
-                    //Log.d("AVAI","AVAI: "+avai);
-                    Toast.makeText(getApplicationContext(), "Welcome Home", Toast.LENGTH_SHORT).show();
+                    if (name.getText().toString().equals("")) {
+                        name.setError("Name is mandatory!");
+                    }
+                    if (phone.getText().toString().equals("")) {
+                        phone.setError("Phone is mandatory!");
+                    }
+                    if (seats.getText().toString().equals("")) {
+                        seats.setError("Seats is mandatory!");
+                    }
+
+                    if (available_seats.getText().toString().equals("")) {
+                        available_seats.setError("Contact Manager");
+                        Toast.makeText(getApplicationContext(), "Contact Manager", Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(), "Please Enter Data", Toast.LENGTH_LONG).show();
+                    }
+
+                    //  et.setError( "First name is required!" );
                 }
                 else
                 {

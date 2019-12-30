@@ -1,5 +1,6 @@
 package com.prajwal.restaurant;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPrefs;
     SharedPreferences.Editor editor_user;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
+    private static final int PERMISSION_REQUEST_CODE = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         firebaseauth = FirebaseAuth.getInstance();
         sharedPrefs = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
         editor_user = sharedPrefs.edit();
+        requestPermission();    //requests permisiions....
 
         //auth state listener
         statelistener = new FirebaseAuth.AuthStateListener() {
@@ -125,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_profile, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
+                R.id.nav_review, R.id.nav_share, R.id.nav_logout)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -217,4 +221,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    //Permission requests....
+    private void requestPermission() {
+
+        ActivityCompat.requestPermissions(MainActivity.this,
+                new String[]{Manifest.permission.CALL_PHONE},
+                PERMISSION_REQUEST_CODE);
+//        onActivityResult(100,RESULT_OK,getIntent());
+    }
 }

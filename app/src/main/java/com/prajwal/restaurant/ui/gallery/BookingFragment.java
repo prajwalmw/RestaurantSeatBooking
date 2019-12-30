@@ -1,11 +1,14 @@
 package com.prajwal.restaurant.ui.gallery;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,12 +24,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.prajwal.restaurant.Edit_Detail;
 import com.prajwal.restaurant.R;
 import com.prajwal.restaurant.database.RestaurantDatabaseHelper;
+
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 public class BookingFragment extends Fragment {
 
@@ -42,6 +49,8 @@ public class BookingFragment extends Fragment {
     SharedPreferences sharedPrefs;
     SharedPreferences.Editor editor_user;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
+    FloatingActionButton call;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         bookingViewModel =
@@ -68,6 +77,21 @@ public class BookingFragment extends Fragment {
         String[] projection = new String[] {RestaurantDatabaseHelper._id,RestaurantDatabaseHelper.R_NAME};
         listView = (ListView) root.findViewById(R.id.listview);
 
+        call = root.findViewById(R.id.call_manager);
+        call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if( ContextCompat.checkSelfPermission(getContext(),
+                        Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
+
+                {
+                    final String a = "tel:"+"9769779980";
+                    Intent i = new Intent(Intent.ACTION_DIAL, Uri.parse(a));
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getContext().startActivity(i);
+                }
+            }
+        });
 
         cursor = sqLiteDatabase.query(RestaurantDatabaseHelper.R_TABLE, projection, null, null, null, null, null);
 
