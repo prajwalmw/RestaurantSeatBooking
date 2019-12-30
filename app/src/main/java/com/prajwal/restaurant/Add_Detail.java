@@ -158,41 +158,53 @@ public class Add_Detail extends AppCompatActivity {
 
             if (!name.getText().toString().equals("") && !phone.getText().toString().equals("")
                 && !seats.getText().toString().equals("") && !available_seats.getText().toString().equals("")) {
-            if (bundle.containsKey("new")) {
-                rowInserted = sqLiteDatabase.insert(R_TABLE, null, values);
-                Intent intent = new Intent(Add_Detail.this, Booking_Fragment_Extends.class);
-                startActivity(intent);
-                finish(); //wont come back to the add form screen.
-            }
 
-            if (rowInserted != -1)
-                Toast.makeText(getApplicationContext(), "Booking Confirmed", Toast.LENGTH_SHORT).show();
-            else
-                Toast.makeText(getApplicationContext(), "Something wrong", Toast.LENGTH_LONG).show();
+                int val1 = Integer.parseInt(seats.getText().toString());
+                int val2 = Integer.parseInt(available_seats.getText().toString());
 
-            if (bundle.containsKey("user_edit_id")) {
-                //setscreen(user_id);
-                Log.d("id", "PResent_id" + user_id);
-                sqLiteDatabase.update(R_TABLE, values, "_id=" + user_id, null);
-                finish();
-            }
-        } else {
-            if (name.getText().toString().equals("")) {
-                name.setError("Name is mandatory!");
-            }
-            if (phone.getText().toString().equals("")) {
-                phone.setError("Phone is mandatory!");
-            }
-            if (seats.getText().toString().equals("")) {
-                seats.setError("Seats is mandatory!");
-            }
-            if (available_seats.getText().toString().equals("")) {
-                seats.setError("Available seats cannot be empty!");
-            }
+                if (val1 <= val2 && val2 != 0) {
+                    rowInserted = -1;
 
-            Toast.makeText(getApplicationContext(), "Please Enter Data", Toast.LENGTH_LONG).show();
-            //  et.setError( "First name is required!" );
-        }
+                    if (bundle.containsKey("new")) {
+                        rowInserted = sqLiteDatabase.insert(R_TABLE, null, values);
+                        Intent intent = new Intent(Add_Detail.this, Booking_Fragment_Extends.class);
+                        startActivity(intent);
+                        finish(); //wont come back to the add form screen.
+                    }
+
+                    if (rowInserted != -1)
+                        Toast.makeText(getApplicationContext(), "Booking Confirmed", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getApplicationContext(), "Something wrong", Toast.LENGTH_LONG).show();
+
+                    if (bundle.containsKey("user_edit_id")) {
+                        //setscreen(user_id);
+                        Log.d("id", "PResent_id" + user_id);
+                        sqLiteDatabase.update(R_TABLE, values, "_id=" + user_id, null);
+                        finish();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Seats Full", Toast.LENGTH_LONG).show();
+                }
+            }
+            else {
+                    if (name.getText().toString().equals("")) {
+                        name.setError("Name is mandatory!");
+                    }
+                    if (phone.getText().toString().equals("")) {
+                        phone.setError("Phone is mandatory!");
+                    }
+                    if (seats.getText().toString().equals("")) {
+                        seats.setError("Seats is mandatory!");
+                    }
+                    if (available_seats.getText().toString().equals("")) {
+                        seats.setError("Available seats cannot be empty!");
+                    }
+
+                    Toast.makeText(getApplicationContext(), "Please Enter Data", Toast.LENGTH_LONG).show();
+                    //  et.setError( "First name is required!" );
+                }
+
     }
 
     private void setscreen(String str) {
