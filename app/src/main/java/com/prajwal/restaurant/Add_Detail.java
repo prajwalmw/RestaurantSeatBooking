@@ -81,7 +81,7 @@ public class Add_Detail extends AppCompatActivity {
         {
 
         }
-        String avai = sharedPrefs.getString("available","0");
+        String avai = sharedPrefs.getString("available","");
         available_seats.setText(avai);
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -99,7 +99,7 @@ public class Add_Detail extends AppCompatActivity {
                 {
                     editor_user.putString("available",available_seats.getText().toString());
                     editor_user.apply();
-                    String avai = sharedPrefs.getString("available","no available");
+                    String avai = sharedPrefs.getString("available","");
                     finish();
                     Log.d("AVAI","AVAI: "+avai);
                     Toast.makeText(getApplicationContext(), "Edit Successful!", Toast.LENGTH_SHORT).show();
@@ -111,7 +111,7 @@ public class Add_Detail extends AppCompatActivity {
                 {
                     editor_user.putString("available",available_seats.getText().toString());
                     editor_user.apply();
-                    String avai = sharedPrefs.getString("available","no available");
+                    String avai = sharedPrefs.getString("available","");
                     finish();
                     Log.d("AVAI","AVAI: "+avai);
                     //Toast.makeText(getApplicationContext(), "Edit Successful!", Toast.LENGTH_SHORT).show();
@@ -162,7 +162,7 @@ public class Add_Detail extends AppCompatActivity {
                 int val1 = Integer.parseInt(seats.getText().toString());
                 int val2 = Integer.parseInt(available_seats.getText().toString());
 
-                if (val1 <= val2 && val2 != 0) {
+                if (val1 <= val2 && val2 != 0 && val1 != 0) {
                     rowInserted = -1;
 
                     if (bundle.containsKey("new")) {
@@ -175,7 +175,7 @@ public class Add_Detail extends AppCompatActivity {
                     if (rowInserted != -1)
                         Toast.makeText(getApplicationContext(), "Booking Confirmed", Toast.LENGTH_SHORT).show();
                     else
-                        Toast.makeText(getApplicationContext(), "Something wrong", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), "Something wrong", Toast.LENGTH_LONG).show();
 
                     if (bundle.containsKey("user_edit_id")) {
                         //setscreen(user_id);
@@ -183,7 +183,12 @@ public class Add_Detail extends AppCompatActivity {
                         sqLiteDatabase.update(R_TABLE, values, "_id=" + user_id, null);
                         finish();
                     }
-                } else {
+                }
+                else if(val1 == 0)
+                {
+                    Toast.makeText(getApplicationContext(), "Enter correct number of seats", Toast.LENGTH_LONG).show();
+                }
+                    else {
                     Toast.makeText(getApplicationContext(), "Seats Full", Toast.LENGTH_LONG).show();
                 }
             }
@@ -197,11 +202,16 @@ public class Add_Detail extends AppCompatActivity {
                     if (seats.getText().toString().equals("")) {
                         seats.setError("Seats is mandatory!");
                     }
-                    if (available_seats.getText().toString().equals("")) {
-                        seats.setError("Available seats cannot be empty!");
-                    }
 
+                if (available_seats.getText().toString().equals("")) {
+                    available_seats.setError("Contact Manager");
+                    Toast.makeText(getApplicationContext(), "Contact Manager", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
                     Toast.makeText(getApplicationContext(), "Please Enter Data", Toast.LENGTH_LONG).show();
+                }
+
                     //  et.setError( "First name is required!" );
                 }
 
