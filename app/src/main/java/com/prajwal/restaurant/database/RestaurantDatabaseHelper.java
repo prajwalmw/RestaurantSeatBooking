@@ -1,6 +1,7 @@
 package com.prajwal.restaurant.database;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -60,5 +61,19 @@ public class RestaurantDatabaseHelper extends SQLiteOpenHelper {
                         "onUpgrade() with unknown oldVersion " + oldVersion);
         }
 
+    }
+
+    public void delete(int anInt)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(R_TABLE,_id + "=?",new String[] {String.valueOf(anInt)});
+        db.close();
+    }
+
+    public Cursor getAll()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM "+R_TABLE,null);
+        return c;
     }
 }

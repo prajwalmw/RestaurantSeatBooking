@@ -1,9 +1,13 @@
 package com.prajwal.restaurant.ui.gallery;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +19,8 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -33,6 +39,9 @@ public class BookingFragment extends Fragment {
     SimpleCursorAdapter simpleCursorAdapter;
     long clicked_id;
     String string_id;
+    SharedPreferences sharedPrefs;
+    SharedPreferences.Editor editor_user;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         bookingViewModel =
@@ -86,5 +95,60 @@ public class BookingFragment extends Fragment {
 
             }
         });
+
+        //delete
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                sharedPrefs = getContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
+                editor_user = sharedPrefs.edit();
+                String email = sharedPrefs.getString("email","no email");
+
+                Log.d("TAG","email is "+email);
+                if("prajwal@intelehealth.io".equalsIgnoreCase(email))
+                {
+                    AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
+                    ad.setTitle("Delete");
+                    ad.setMessage("Are you sure you want to delete ? ");
+
+                    final int pos = position;
+                    ad.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            cursor.moveToPosition(pos);
+                            // db.delete(c.getInt(c.getColumnIndex(Personal_medical_database._id)));
+                            //c = db.getAll();
+                            restaurantDatabaseHelper.delete
+                                    (cursor.getInt(cursor.getColumnIndexOrThrow(RestaurantDatabaseHelper._id)));       //hint for update.
+                            cursor=restaurantDatabaseHelper.getAll();
+                            simpleCursorAdapter.swapCursor(cursor);
+
+                            listView.setAdapter(simpleCursorAdapter);
+                            //cAdapter.notifyDataSetChanged();
+
+                        }
+                    });
+
+                    ad.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    ad.show();
+                }
+                else
+                {
+                    //Do nothing
+                }
+                return  true;
+
+            }
+        });
+
+
+        //end
     }
 }
