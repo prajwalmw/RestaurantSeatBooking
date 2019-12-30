@@ -89,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
                     String emailnew = sharedPrefs.getString("email","no email");
                     Log.d("TAG","email is login"+emailnew);
 
-
+                    editor_user.putString("profile_image", firebaseauth.getCurrentUser().getPhotoUrl().toString());
+                    editor_user.apply();
                     Glide.with(getApplicationContext())
                             .load(firebaseauth.getCurrentUser().getPhotoUrl()).asBitmap().error(R.drawable.restaurant)   //asbitmap after load always.
                             .into(new SimpleTarget<Bitmap>() {
