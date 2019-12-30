@@ -157,6 +157,8 @@ public class MainActivity extends AppCompatActivity {
                 editor_user.apply(); //apply is imp or else the changes wont be saved
 
 
+                editor_user.putString("profile_image", firebaseauth.getCurrentUser().getPhotoUrl().toString());
+                editor_user.apply();
                 Glide.with(getApplicationContext())
                         .load(firebaseauth.getCurrentUser().getPhotoUrl()).asBitmap().error(R.drawable.restaurant)   //asbitmap after load always.
                         .into(new SimpleTarget<Bitmap>() {
@@ -165,6 +167,9 @@ public class MainActivity extends AppCompatActivity {
                                 image_user.setImageBitmap(resource);
                             }
                         });
+
+
+                Log.d("text","Nav : "+text_username);
 
 
                 Log.d("text","Nav : "+text_username);
