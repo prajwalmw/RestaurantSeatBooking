@@ -26,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -71,6 +72,24 @@ public class MainActivity extends AppCompatActivity {
         firebaseauth = FirebaseAuth.getInstance();
         sharedPrefs = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
         editor_user = sharedPrefs.edit();
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        headerview = navigationView.getHeaderView(0);
+        text_username = (TextView) headerview.findViewById(R.id.textview_username);
+        text_email = (TextView) headerview.findViewById(R.id.textView_emailid);
+        image_user = (ImageView) headerview.findViewById(R.id.imageView_userimage);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home, R.id.nav_profile, R.id.nav_gallery, R.id.nav_slideshow,
+                R.id.nav_review, R.id.nav_share, R.id.nav_logout)
+                .setDrawerLayout(drawer)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, navController);
+
         requestPermission();    //requests permisiions....
 
         //auth state listener
@@ -99,14 +118,17 @@ public class MainActivity extends AppCompatActivity {
                     Glide.with(getApplicationContext())
                             .load(firebaseauth.getCurrentUser().getPhotoUrl())
                             .asBitmap()
-                            .error(R.drawable.restaurant)   //asbitmap after load always.
+                            .error(R.drawable.restaurant)//asbitmap after load always.
                             .into(new SimpleTarget<Bitmap>() {
                                 @Override
                                 public void onResourceReady(Bitmap resource,
                                                             GlideAnimation<? super Bitmap> glideAnimation) {
+                                    //Bitmap photo = (Bitmap) data.getExtras().get(firebaseauth.getCurrentUser().getPhotoUrl().toString());
                                     image_user.setImageBitmap(resource);
-                                    //editor_user.putString("profile_image", firebaseauth.getCurrentUser().getPhotoUrl().toString());
-                                   // editor_user.apply();
+                                    // editor_user.putString("profile_image", firebaseauth.getCurrentUser().getPhotoUrl().toString());
+                                    //editor_user.apply();
+
+
                                 }
                             });
 
@@ -132,22 +154,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        headerview = navigationView.getHeaderView(0);
-        text_username = (TextView) headerview.findViewById(R.id.textview_username);
-        text_email = (TextView) headerview.findViewById(R.id.textView_emailid);
-        image_user = (ImageView) headerview.findViewById(R.id.imageView_userimage);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_profile, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_review, R.id.nav_share, R.id.nav_logout)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+
     }
 
     @Override
@@ -212,12 +219,13 @@ public class MainActivity extends AppCompatActivity {
             }
             else if (resultCode == RESULT_CANCELED) {
                 //Toast.makeText(this, "Sign in canceled", Toast.LENGTH_SHORT).show();
-                //finish();
                 moveTaskToBack(true);
                 finish();
+                //onBackPressed();
             }
         }
     }
+
 
 
     @Override
