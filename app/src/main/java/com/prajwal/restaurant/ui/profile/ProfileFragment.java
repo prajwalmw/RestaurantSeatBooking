@@ -24,9 +24,6 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.google.firebase.auth.FirebaseAuth;
 import com.prajwal.restaurant.R;
-import com.prajwal.restaurant.ui.gallery.BookingViewModel;
-
-import java.net.URI;
 
 public class ProfileFragment extends Fragment {
 

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.prajwal.restaurant.ui.gallery.BookingFragment;
+import com.prajwal.restaurant.ui.booking.BookingFragment;
 
 public class Booking_Fragment_Extends extends AppCompatActivity {
     @Override

@@ -1,4 +1,4 @@
-package com.prajwal.restaurant.ui.gallery;
+package com.prajwal.restaurant.ui.booking;
 
 import android.Manifest;
 import android.content.Context;
@@ -15,8 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
@@ -32,8 +30,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.prajwal.restaurant.Edit_Detail;
 import com.prajwal.restaurant.R;
 import com.prajwal.restaurant.database.RestaurantDatabaseHelper;
-
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 public class BookingFragment extends Fragment {
 

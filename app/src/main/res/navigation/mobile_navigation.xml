@@ -19,15 +19,15 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.prajwal.restaurant.ui.gallery.BookingFragment"
+        android:name="com.prajwal.restaurant.ui.booking.BookingFragment"
         android:label="My Bookings"
         tools:layout="@layout/fragment_booking" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.prajwal.restaurant.ui.slideshow.SlideshowFragment"
+        android:name="com.prajwal.restaurant.ui.aboutUs.AboutUsFragment"
         android:label="About Us"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_aboutUs" />
 
     <fragment
         android:id="@+id/nav_review"

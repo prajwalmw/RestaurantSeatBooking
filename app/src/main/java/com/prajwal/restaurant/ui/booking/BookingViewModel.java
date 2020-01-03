@@ -1,4 +1,4 @@
-package com.prajwal.restaurant.ui.gallery;
+package com.prajwal.restaurant.ui.booking;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

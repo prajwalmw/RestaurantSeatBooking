@@ -6,9 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.prajwal.restaurant.database.RestaurantDatabaseHelper;
-import com.prajwal.restaurant.ui.gallery.BookingFragment;
+import com.prajwal.restaurant.ui.booking.BookingFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
