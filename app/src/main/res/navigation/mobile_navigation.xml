@@ -31,9 +31,9 @@
 
     <fragment
         android:id="@+id/nav_review"
-        android:name="com.prajwal.restaurant.ui.tools.ToolsFragment"
+        android:name="com.prajwal.restaurant.ui.review.ReviewFragment"
         android:label="Review"
-        tools:layout="@layout/fragment_tools" />
+        tools:layout="@layout/review_fragment" />
 
     <fragment
         android:id="@+id/nav_share"

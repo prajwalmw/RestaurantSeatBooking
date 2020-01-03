@@ -1,4 +1,4 @@
-package com.prajwal.restaurant.ui.tools;
+package com.prajwal.restaurant.ui.review;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
