@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.google.firebase.auth.FirebaseAuth;
 import com.prajwal.restaurant.R;
 import com.prajwal.restaurant.ui.gallery.BookingViewModel;
 
@@ -36,6 +37,7 @@ public class ProfileFragment extends Fragment {
     ImageView profile;
     TextView username, email;
     View root;
+    FirebaseAuth firebaseAuth;
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -64,12 +66,14 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        firebaseAuth = FirebaseAuth.getInstance();
+
         sharedPrefs = getContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
         String uri_string = sharedPrefs.getString("profile_image","");
         Log.d("URI","URI: "+uri_string);
         Uri uri = Uri.parse(uri_string);
         Glide.with(getContext())
-                .load(uri).asBitmap().error(R.drawable.restaurant)//asbitmap after load always.
+                .load(firebaseAuth.getCurrentUser().getPhotoUrl()).asBitmap().error(R.drawable.restaurant)//asbitmap after load always.
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {

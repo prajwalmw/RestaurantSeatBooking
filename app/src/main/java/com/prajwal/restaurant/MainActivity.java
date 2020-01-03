@@ -2,9 +2,13 @@ package com.prajwal.restaurant;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
@@ -19,7 +23,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -89,17 +95,23 @@ public class MainActivity extends AppCompatActivity {
                     String emailnew = sharedPrefs.getString("email","no email");
                     Log.d("TAG","email is login"+emailnew);
 
-                    editor_user.putString("profile_image", firebaseauth.getCurrentUser().getPhotoUrl().toString());
-                    editor_user.apply();
+
                     Glide.with(getApplicationContext())
-                            .load(firebaseauth.getCurrentUser().getPhotoUrl()).asBitmap().error(R.drawable.restaurant)   //asbitmap after load always.
+                            .load(firebaseauth.getCurrentUser().getPhotoUrl())
+                            .asBitmap()
+                            .error(R.drawable.restaurant)   //asbitmap after load always.
                             .into(new SimpleTarget<Bitmap>() {
                                 @Override
-                                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                public void onResourceReady(Bitmap resource,
+                                                            GlideAnimation<? super Bitmap> glideAnimation) {
                                     image_user.setImageBitmap(resource);
+                                    //editor_user.putString("profile_image", firebaseauth.getCurrentUser().getPhotoUrl().toString());
+                                   // editor_user.apply();
                                 }
                             });
 
+                    //editor_user.putString("profile_image", firebaseauth.getCurrentUser().getPhotoUrl());
+                    //editor_user.apply();
 
                     Log.d("text","Nav : "+text_username);
                 }
@@ -139,32 +151,55 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == RC_SIGN_IN) {
+        if (resultCode != RESULT_CANCELED && requestCode == RC_SIGN_IN) {
 
-            if (resultCode == RESULT_OK) {
+            if (resultCode == RESULT_OK && data != null) {
                 text_username.setText(firebaseauth.getCurrentUser().getDisplayName());
                 //username of logged in user.
-                editor_user.putString("username", firebaseauth.getCurrentUser().getDisplayName());
+                editor_user.putString("username", text_username.getText().toString());
                 editor_user.apply(); //apply is imp or else the changes wont be saved
 
 
                 text_email.setText(firebaseauth.getCurrentUser().getEmail());
                 //email id of logged in user.
-                editor_user.putString("email", firebaseauth.getCurrentUser().getEmail() );
+                editor_user.putString("email", text_email.getText().toString());
                 editor_user.apply(); //apply is imp or else the changes wont be saved
 
 
-                editor_user.putString("profile_image", firebaseauth.getCurrentUser().getPhotoUrl().toString());
-                editor_user.apply();
+               /* if(Build.VERSION.SDK_INT == Build.VERSION_CODES.M)
+                {
+                    Uri uri = data.getData();
+                    String uri_string = uri.toString();
+                    editor_user.putString("profile_image", uri_string
+                    );
+                    editor_user.apply();
+                }
+                else
+                {
+                    String uri = firebaseauth.getCurrentUser().getPhotoUrl().toString();
+                    editor_user.putString("profile_image", uri);
+                    editor_user.apply();
+                }*/
+
+                //Bitmap photo = null;
+
                 Glide.with(getApplicationContext())
-                        .load(firebaseauth.getCurrentUser().getPhotoUrl()).asBitmap().error(R.drawable.restaurant)   //asbitmap after load always.
+                        .load(firebaseauth.getCurrentUser().getPhotoUrl())
+                        .asBitmap()
+                        .error(R.drawable.restaurant)//asbitmap after load always.
                         .into(new SimpleTarget<Bitmap>() {
                             @Override
-                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                                image_user.setImageBitmap(resource);
+                            public void onResourceReady(Bitmap resource,
+                                                        GlideAnimation<? super Bitmap> glideAnimation) {
+                                    //Bitmap photo = (Bitmap) data.getExtras().get(firebaseauth.getCurrentUser().getPhotoUrl().toString());
+                                    image_user.setImageBitmap(resource);
+                                   // editor_user.putString("profile_image", firebaseauth.getCurrentUser().getPhotoUrl().toString());
+                                    //editor_user.apply();
+
+
                             }
                         });
 
@@ -174,25 +209,14 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.d("text","Nav : "+text_username);
                 Toast.makeText(this, "You're now signed in", Toast.LENGTH_SHORT).show();
-            } else if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, "Sign in canceled", Toast.LENGTH_SHORT).show();
+            }
+            else if (resultCode == RESULT_CANCELED) {
+                //Toast.makeText(this, "Sign in canceled", Toast.LENGTH_SHORT).show();
+                //finish();
+                moveTaskToBack(true);
                 finish();
             }
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        firebaseauth.addAuthStateListener(statelistener);
-
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        firebaseauth.removeAuthStateListener(statelistener);
     }
 
 
@@ -235,4 +259,60 @@ public class MainActivity extends AppCompatActivity {
                 PERMISSION_REQUEST_CODE);
 //        onActivityResult(100,RESULT_OK,getIntent());
     }
+
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // main logic
+                } else {
+                    // Toast.makeText(getApplicationContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        // Toast.makeText(getApplicationContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
+
+                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
+                                != PackageManager.PERMISSION_GRANTED) {
+                            new AlertDialog.Builder(this)
+                                    .setMessage("You need to allow access permissions")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.cancel();
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                requestPermission();
+                                                //onActivityResult(100,RESULT_OK,getIntent());
+                                            }
+                                        }
+                                    })
+                                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.cancel();
+                                        }
+                                    })
+                                    .create()
+                                    .show();
+
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        firebaseauth.addAuthStateListener(statelistener);
+
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        firebaseauth.removeAuthStateListener(statelistener);
+    }
+
 }

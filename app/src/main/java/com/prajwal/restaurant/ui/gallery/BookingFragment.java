@@ -81,7 +81,7 @@ public class BookingFragment extends Fragment {
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if( ContextCompat.checkSelfPermission(getContext(),
+                if(ContextCompat.checkSelfPermission(getContext(),
                         Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
 
                 {
