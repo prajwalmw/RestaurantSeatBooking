@@ -43,6 +43,6 @@
 
     <fragment
         android:id="@+id/nav_logout"
-        android:name="com.prajwal.restaurant.ui.send.SendFragment"
+        android:name="com.prajwal.restaurant.ui.logout.LogoutFragment"
         android:label="Logout" />
 </navigation>

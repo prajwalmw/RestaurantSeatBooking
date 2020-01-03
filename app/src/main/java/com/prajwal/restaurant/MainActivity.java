@@ -48,7 +48,7 @@ import android.widget.Toast;
 
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private AppBarConfiguration mAppBarConfiguration;
     private FirebaseAuth firebaseauth;
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
         headerview = navigationView.getHeaderView(0);
         text_username = (TextView) headerview.findViewById(R.id.textview_username);
         text_email = (TextView) headerview.findViewById(R.id.textView_emailid);
@@ -86,9 +87,11 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_review, R.id.nav_share, R.id.nav_logout)
                 .setDrawerLayout(drawer)
                 .build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
 
         requestPermission();    //requests permisiions....
 
@@ -323,4 +326,4 @@ public class MainActivity extends AppCompatActivity {
         firebaseauth.removeAuthStateListener(statelistener);
     }
 
-}
+    }
