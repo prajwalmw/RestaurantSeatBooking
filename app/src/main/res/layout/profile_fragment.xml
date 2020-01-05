@@ -11,7 +11,7 @@
         android:layout_height="200dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        android:src="@drawable/restaurant"
+        android:src="@drawable/logo"
         android:id="@+id/profile_image"/>
 
     <TextView
