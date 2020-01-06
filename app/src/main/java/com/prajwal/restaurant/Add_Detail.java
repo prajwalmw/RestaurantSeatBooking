@@ -204,6 +204,25 @@ public class Add_Detail extends AppCompatActivity {
                     if (bundle.containsKey("user_edit_id")) {
                         //setscreen(user_id);
                         Log.d("id", "PResent_id" + user_id);
+
+
+                        int i = Integer.parseInt(sharedPrefs.getString("seats_enter",""));
+                        Log.d("value", "i " + i);
+                        int i2 = Integer.parseInt(seats_text);
+                        Log.d("value", "i2 " + i2);
+                        if(i >= i2)
+                        {
+                            int a1 = i - i2;
+                            Log.d("value", "a1 " + a1);
+                            int a2 = Integer.parseInt(available_text) + a1;
+                            Log.d("value", "a2 " + a2);
+                            available_text = String.valueOf(a2);
+                            Log.d("value", "available " + available_text);
+                            editor_user.putString("available",available_text);
+                            editor_user.apply();
+                            sqLiteDatabase.update(R_TABLE, values, "_id=" + user_id, null);
+                            finish();
+                        }
                         sqLiteDatabase.update(R_TABLE, values, "_id=" + user_id, null);
                         finish();
                     }
@@ -253,6 +272,8 @@ public class Add_Detail extends AppCompatActivity {
                 name.setText(cursor.getString(cursor.getColumnIndexOrThrow(R_NAME)));
                 phone.setText(cursor.getString(cursor.getColumnIndexOrThrow(R_CONTACT)));
                 seats.setText(cursor.getString(cursor.getColumnIndexOrThrow(R_SEATS)));
+                editor_user.putString("seats_enter", seats.getText().toString());
+                editor_user.apply();
             }
             while (cursor.moveToNext());
         }
