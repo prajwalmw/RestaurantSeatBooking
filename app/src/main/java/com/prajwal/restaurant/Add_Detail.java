@@ -205,7 +205,7 @@ public class Add_Detail extends AppCompatActivity {
                         //setscreen(user_id);
                         Log.d("id", "PResent_id" + user_id);
 
-
+                        //code to edit the available seats logic on adding less than og value
                         int i = Integer.parseInt(sharedPrefs.getString("seats_enter",""));
                         Log.d("value", "i " + i);
                         int i2 = Integer.parseInt(seats_text);
@@ -215,6 +215,19 @@ public class Add_Detail extends AppCompatActivity {
                             int a1 = i - i2;
                             Log.d("value", "a1 " + a1);
                             int a2 = Integer.parseInt(available_text) + a1;
+                            Log.d("value", "a2 " + a2);
+                            available_text = String.valueOf(a2);
+                            Log.d("value", "available " + available_text);
+                            editor_user.putString("available",available_text);
+                            editor_user.apply();
+                            sqLiteDatabase.update(R_TABLE, values, "_id=" + user_id, null);
+                            finish();
+                        }
+                        else
+                        {
+                            int a1 = i2 - i;
+                            Log.d("value", "a1 " + a1);
+                            int a2 = Integer.parseInt(available_text) - a1;
                             Log.d("value", "a2 " + a2);
                             available_text = String.valueOf(a2);
                             Log.d("value", "available " + available_text);
