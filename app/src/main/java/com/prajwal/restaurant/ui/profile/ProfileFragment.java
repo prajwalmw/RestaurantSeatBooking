@@ -32,7 +32,7 @@ public class ProfileFragment extends Fragment {
     SharedPreferences.Editor editor_user;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
     ImageView profile;
-    TextView username, email, call;
+    TextView username, email, status;
     View root;
     FirebaseAuth firebaseAuth;
 
@@ -49,7 +49,7 @@ public class ProfileFragment extends Fragment {
         profile = root.findViewById(R.id.profile_image);
         username = root.findViewById(R.id.username_text);
         email = root.findViewById(R.id.email_text);
-       // call = root.findViewById(R.id.phone_text);
+        status = root.findViewById(R.id.status_text);
         onStart();
         return root;
     }
@@ -81,9 +81,18 @@ public class ProfileFragment extends Fragment {
 
         String username1 = sharedPrefs.getString("username","Username");
         String email2 = sharedPrefs.getString("email","Email ID");
-        //String phone = sharedPrefs.getString("phone","not provided");
 
         username.setText(username1);
         email.setText(email2);
+
+        String email_status = sharedPrefs.getString("email","no email");
+        if("prajwal@intelehealth.io".equalsIgnoreCase(email_status))
+        {
+            status.setText("Manager");
+        }
+        else
+        {
+            status.setText("User");
+        }
     }
 }
