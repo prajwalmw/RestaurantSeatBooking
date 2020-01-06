@@ -9,7 +9,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 public class RestaurantDatabaseHelper extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "restaurant.db";
     public static SQLiteDatabase database;
 
@@ -20,12 +20,21 @@ public class RestaurantDatabaseHelper extends SQLiteOpenHelper {
     public static final String R_CONTACT = "MOBILE_NO";
     public static final String R_AVAILABLE = "AVAILABLE_SEATS";
 
+    public static final String R_REVIEW = "Restaurant_Review";
+    public static final String R_USERNAME = "Restaurant_USER";
+    public static final String R_MARKS = "Restaurant_MARKS";
+
     public static final String CREATE_RESTAURANT_DATA = "CREATE TABLE IF NOT EXISTS "+R_TABLE+"(" +
             _id + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             R_NAME + " TEXT," +
             R_SEATS + " INTEGER," +
             R_AVAILABLE + " INTEGER," +
             R_CONTACT + " INTEGER);";
+
+    public static final String CREATE_RESTAURANT_REVIEW = "CREATE TABLE IF NOT EXISTS "+R_REVIEW+"(" +
+            _id + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            R_USERNAME + " TEXT," +
+            R_MARKS + " TEXT);";
 
 
     public RestaurantDatabaseHelper(Context context)
@@ -36,6 +45,7 @@ public class RestaurantDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(CREATE_RESTAURANT_DATA);
+        sqLiteDatabase.execSQL(CREATE_RESTAURANT_REVIEW);
         Log.i("DATA","Table has been created");
     }
 

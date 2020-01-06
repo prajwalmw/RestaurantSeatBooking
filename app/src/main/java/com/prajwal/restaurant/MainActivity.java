@@ -18,6 +18,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.os.Environment;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,6 +47,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity{
@@ -266,7 +271,8 @@ public class MainActivity extends AppCompatActivity{
     private void requestPermission() {
 
         ActivityCompat.requestPermissions(MainActivity.this,
-                new String[]{Manifest.permission.CALL_PHONE},
+                new String[]{Manifest.permission.CALL_PHONE,Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE},
                 PERMISSION_REQUEST_CODE);
 //        onActivityResult(100,RESULT_OK,getIntent());
     }

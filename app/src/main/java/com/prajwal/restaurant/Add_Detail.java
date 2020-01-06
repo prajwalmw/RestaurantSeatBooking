@@ -190,7 +190,14 @@ public class Add_Detail extends AppCompatActivity {
                     }
 
                     if (rowInserted != -1)
+                    {
                         Toast.makeText(getApplicationContext(), "Booking Confirmed", Toast.LENGTH_SHORT).show();
+                        int minus = Integer.parseInt(available_text) - Integer.parseInt(seats_text);
+                        available_text = String.valueOf(minus);
+                        available_seats.setText(available_text);
+                        editor_user.putString("available",available_seats.getText().toString());
+                        editor_user.apply();
+                    }
                     else
                         //Toast.makeText(getApplicationContext(), "Something wrong", Toast.LENGTH_LONG).show();
 
