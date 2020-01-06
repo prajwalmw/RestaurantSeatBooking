@@ -32,7 +32,7 @@ public class ProfileFragment extends Fragment {
     SharedPreferences.Editor editor_user;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
     ImageView profile;
-    TextView username, email;
+    TextView username, email, call;
     View root;
     FirebaseAuth firebaseAuth;
 
@@ -49,6 +49,7 @@ public class ProfileFragment extends Fragment {
         profile = root.findViewById(R.id.profile_image);
         username = root.findViewById(R.id.username_text);
         email = root.findViewById(R.id.email_text);
+       // call = root.findViewById(R.id.phone_text);
         onStart();
         return root;
     }
@@ -80,6 +81,7 @@ public class ProfileFragment extends Fragment {
 
         String username1 = sharedPrefs.getString("username","Username");
         String email2 = sharedPrefs.getString("email","Email ID");
+        //String phone = sharedPrefs.getString("phone","not provided");
 
         username.setText(username1);
         email.setText(email2);

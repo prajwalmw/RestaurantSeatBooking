@@ -8,7 +8,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         android:src="@drawable/logo"
@@ -22,8 +22,10 @@
         android:hint="Username"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="20dp"/>
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:textAlignment="center"
+        android:drawableTop="@drawable/ic_person_black_24dp" />
 
     <TextView
         android:id="@+id/email_text"
@@ -33,7 +35,10 @@
         android:hint="Email ID"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="20dp"/>
+        android:layout_marginTop="40dp"
+        android:layout_marginHorizontal="20dp"
+        android:textAlignment="center"
+        android:drawableTop="@drawable/ic_email_black_24dp" />
+
 
 </RelativeLayout>

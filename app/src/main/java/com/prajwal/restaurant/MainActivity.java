@@ -177,7 +177,6 @@ public class MainActivity extends AppCompatActivity{
                 editor_user.putString("username", text_username.getText().toString());
                 editor_user.apply(); //apply is imp or else the changes wont be saved
 
-
                 text_email.setText(firebaseauth.getCurrentUser().getEmail());
                 //email id of logged in user.
                 editor_user.putString("email", text_email.getText().toString());
