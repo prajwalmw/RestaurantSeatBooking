@@ -34,7 +34,7 @@
         android:textStyle="bold"
         android:textAlignment="center"
         android:gravity="center"
-        android:textSize="15sp"
+        android:textSize="17sp"
         />
 
     <Button

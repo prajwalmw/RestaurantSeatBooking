@@ -25,7 +25,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_marginHorizontal="20sp"
-        android:paddingVertical="20sp"
+        android:padding="20sp"
         android:layout_marginBottom="130sp"
         android:textSize="18sp"
         android:textStyle="bold"
