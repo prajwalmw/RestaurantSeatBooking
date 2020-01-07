@@ -46,6 +46,7 @@ public class BookingFragment extends Fragment {
     SharedPreferences.Editor editor_user;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
     FloatingActionButton call;
+    String email;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class BookingFragment extends Fragment {
                 textView.setText(s);
             }
         });*/
+
        onStart();
         return root;
     }
@@ -70,7 +72,10 @@ public class BookingFragment extends Fragment {
         restaurantDatabaseHelper = new RestaurantDatabaseHelper(getContext());
         sqLiteDatabase = restaurantDatabaseHelper.getReadableDatabase();
 
-        String[] projection = new String[] {RestaurantDatabaseHelper._id,RestaurantDatabaseHelper.R_NAME};
+        sharedPrefs = getContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
+        email = sharedPrefs.getString("email","no email");
+
+        String[] projection = new String[] {RestaurantDatabaseHelper.R_NAME,RestaurantDatabaseHelper._id};
         listView = (ListView) root.findViewById(R.id.listview);
 
         call = root.findViewById(R.id.call_manager);
@@ -89,12 +94,35 @@ public class BookingFragment extends Fragment {
             }
         });
 
-        cursor = sqLiteDatabase.query(RestaurantDatabaseHelper.R_TABLE, projection, null, null, null, null, null);
 
-        simpleCursorAdapter = new SimpleCursorAdapter(getContext(),R.layout.mybooking_listlayout,cursor,
-                projection,new int[]{R.id.prajwal_list_id,R.id.prajwal_list_name});
-        listView.setAdapter(simpleCursorAdapter);
-        listView.setTextFilterEnabled(true);
+
+        Log.d("TAG","email BOYS"+email);
+        if("prajwal@intelehealth.io".equalsIgnoreCase(email))
+        {
+
+
+            cursor = sqLiteDatabase.query(RestaurantDatabaseHelper.R_TABLE, projection, null, null, null, null, null);
+
+            simpleCursorAdapter = new SimpleCursorAdapter(getContext(),R.layout.mybooking_listlayout,cursor,
+                    projection,new int[]{R.id.prajwal_list_name});
+            listView.setAdapter(simpleCursorAdapter);
+            listView.setTextFilterEnabled(true);
+        }
+        else
+        {
+            cursor = sqLiteDatabase.query
+                    (RestaurantDatabaseHelper.R_TABLE,
+                            projection,
+                            RestaurantDatabaseHelper.R_LOGIN_EMAIL + "=?",
+                            new String[]{email},
+                            null, null, null);
+
+            simpleCursorAdapter = new SimpleCursorAdapter(getContext(),R.layout.mybooking_listlayout,cursor,
+                    projection,new int[]{R.id.prajwal_list_name});
+            listView.setAdapter(simpleCursorAdapter);
+            listView.setTextFilterEnabled(true);
+
+        }
 
 
         //end

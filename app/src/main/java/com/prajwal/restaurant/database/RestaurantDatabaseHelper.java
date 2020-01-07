@@ -19,6 +19,7 @@ public class RestaurantDatabaseHelper extends SQLiteOpenHelper {
     public static final String R_SEATS = "SEATS";
     public static final String R_CONTACT = "MOBILE_NO";
     public static final String R_AVAILABLE = "AVAILABLE_SEATS";
+    public static final String R_LOGIN_EMAIL = "LOGIN_EMAIL";
 
     public static final String R_REVIEW = "Restaurant_Review";
     public static final String R_USERNAME = "Restaurant_USER";
@@ -29,6 +30,7 @@ public class RestaurantDatabaseHelper extends SQLiteOpenHelper {
             R_NAME + " TEXT," +
             R_SEATS + " INTEGER," +
             R_AVAILABLE + " INTEGER," +
+            R_LOGIN_EMAIL + " TEXT," +
             R_CONTACT + " INTEGER);";
 
     public static final String CREATE_RESTAURANT_REVIEW = "CREATE TABLE IF NOT EXISTS "+R_REVIEW+"(" +

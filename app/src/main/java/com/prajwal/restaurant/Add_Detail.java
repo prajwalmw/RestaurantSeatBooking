@@ -32,6 +32,7 @@ import java.lang.reflect.Type;
 
 import static com.prajwal.restaurant.database.RestaurantDatabaseHelper.R_AVAILABLE;
 import static com.prajwal.restaurant.database.RestaurantDatabaseHelper.R_CONTACT;
+import static com.prajwal.restaurant.database.RestaurantDatabaseHelper.R_LOGIN_EMAIL;
 import static com.prajwal.restaurant.database.RestaurantDatabaseHelper.R_NAME;
 import static com.prajwal.restaurant.database.RestaurantDatabaseHelper.R_SEATS;
 import static com.prajwal.restaurant.database.RestaurantDatabaseHelper.R_TABLE;
@@ -162,6 +163,7 @@ public class Add_Detail extends AppCompatActivity {
         //PhoneNumberUtils.formatNumber(phone_text);
         seats_text = seats.getText().toString();
         available_text = available_seats.getText().toString();
+        String emailnew = sharedPrefs.getString("email","no email");
 
         restaurantDatabaseHelper = new RestaurantDatabaseHelper(this);
         sqLiteDatabase = restaurantDatabaseHelper.getWritableDatabase();
@@ -170,8 +172,9 @@ public class Add_Detail extends AppCompatActivity {
         values.put(R_NAME, name_text);
         values.put(R_CONTACT, phone_text);
         values.put(R_SEATS, seats_text);
+        values.put(R_LOGIN_EMAIL, emailnew);
         values.put(R_AVAILABLE, available_text);
-
+Log.d("DB","VALUES: "+values);
 
             if (!name.getText().toString().equals("") && !phone.getText().toString().equals("")
                 && !seats.getText().toString().equals("") && !available_seats.getText().toString().equals("")) {

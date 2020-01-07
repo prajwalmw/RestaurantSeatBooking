@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "910222700859-39e97jnkmolnm1obbi3dco0p5qatk7lb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.prajwal.restaurant",
+            "certificate_hash": "e412bb46846dba7809c0ddf54fa4b29f1c4a07e8"
+          }
+        },
+        {
           "client_id": "910222700859-lqdeusc1ce8oviu57ccna03ptbbll1pl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
