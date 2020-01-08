@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="#FFFFFF"
     android:layout_height="match_parent">
 
     <ImageView
@@ -13,7 +14,8 @@
         android:layout_weight="0.8"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        android:src="@drawable/logo"/>
+        android:layout_margin="20sp"
+        android:src="@drawable/niki"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

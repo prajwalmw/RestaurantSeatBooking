@@ -74,7 +74,7 @@ public class Add_Detail extends AppCompatActivity {
 
         Log.d("TAG","email is "+email);
 
-        if("prajwal@intelehealth.io".equalsIgnoreCase(email))
+        if("nikita.narayan98@gmail.com".equalsIgnoreCase(email))
         {
 
         }
@@ -95,7 +95,7 @@ public class Add_Detail extends AppCompatActivity {
 
                 Log.d("TAG","email is "+email);
 
-                if("prajwal@intelehealth.io".equalsIgnoreCase(email) && name.getText().toString().equals("") && phone.getText().toString().equals("")
+                if("nikita.narayan98@gmail.com".equalsIgnoreCase(email) && name.getText().toString().equals("") && phone.getText().toString().equals("")
                         && seats.getText().toString().equals("") && !available_seats.getText().toString().equals("")  && !sharedPrefs.getString("available","").equalsIgnoreCase(available_seats.getText().toString()))
                 {
                     editor_user.putString("available",available_seats.getText().toString());
@@ -107,7 +107,7 @@ public class Add_Detail extends AppCompatActivity {
                     //insertData();
                 }
 
-                else if("prajwal@intelehealth.io".equalsIgnoreCase(email) && !name.getText().toString().equals("") && !phone.getText().toString().equals("")
+                else if("nikita.narayan98@gmail.com".equalsIgnoreCase(email) && !name.getText().toString().equals("") && !phone.getText().toString().equals("")
                         && !seats.getText().toString().equals("") && !available_seats.getText().toString().equals(""))
                 {
                     editor_user.putString("available",available_seats.getText().toString());
@@ -119,7 +119,7 @@ public class Add_Detail extends AppCompatActivity {
                     insertData();
                 }
 
-                else if("prajwal@intelehealth.io".equalsIgnoreCase(email) && name.getText().toString().equals("") && phone.getText().toString().equals("")
+                else if("nikita.narayan98@gmail.com".equalsIgnoreCase(email) && name.getText().toString().equals("") && phone.getText().toString().equals("")
                         && seats.getText().toString().equals("") && !available_seats.getText().toString().equals("") && sharedPrefs.getString("available","").equalsIgnoreCase(available_seats.getText().toString()))
                 {
                     if (name.getText().toString().equals("")) {
@@ -306,7 +306,7 @@ Log.d("DB","VALUES: "+values);
 
         Log.d("TAG","email is "+email);
 
-        if("prajwal@intelehealth.io".equalsIgnoreCase(email))
+        if("nikita.narayan98@gmail.com".equalsIgnoreCase(email))
         {
             getMenuInflater().inflate(R.menu.edit_menu, menu);
         }

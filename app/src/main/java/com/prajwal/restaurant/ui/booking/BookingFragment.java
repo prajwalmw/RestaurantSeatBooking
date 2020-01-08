@@ -97,7 +97,7 @@ public class BookingFragment extends Fragment {
 
 
         Log.d("TAG","email BOYS"+email);
-        if("prajwal@intelehealth.io".equalsIgnoreCase(email))
+        if("nikita.narayan98@gmail.com".equalsIgnoreCase(email))
         {
 
 
@@ -154,7 +154,7 @@ public class BookingFragment extends Fragment {
                 String email = sharedPrefs.getString("email","no email");
 
                 Log.d("TAG","email is "+email);
-                if("prajwal@intelehealth.io".equalsIgnoreCase(email))
+                if("nikita.narayan98@gmail.com".equalsIgnoreCase(email))
                 {
                     AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
                     ad.setTitle("Delete");

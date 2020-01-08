@@ -86,7 +86,7 @@ public class ProfileFragment extends Fragment {
         email.setText(email2);
 
         String email_status = sharedPrefs.getString("email","no email");
-        if("prajwal@intelehealth.io".equalsIgnoreCase(email_status))
+        if("nikita.narayan98@gmail.com".equalsIgnoreCase(email_status))
         {
             status.setText("Manager");
         }
