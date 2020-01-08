@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.profile.ProfileFragment">
 
@@ -10,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/niki"
+        android:background="#80e5ffff"
+        app:srcCompat="@drawable/ic_sentiment_satisfied_black_24dp"
         android:id="@+id/profile_image"/>
 
     <LinearLayout
