@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity{
                     Glide.with(getApplicationContext())
                             .load(firebaseauth.getCurrentUser().getPhotoUrl())
                             .asBitmap()
-                            .error(R.drawable.restaurant)//asbitmap after load always.
+                            .error(R.drawable.niki)//asbitmap after load always.
                             .into(new SimpleTarget<Bitmap>() {
                                 @Override
                                 public void onResourceReady(Bitmap resource,
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity{
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
                                     .setIsSmartLockEnabled(false)
-                                    .setLogo(R.drawable.restaurant)
+                                    .setLogo(R.drawable.niki)
                                     .setAvailableProviders(Arrays.asList(
                                             new AuthUI.IdpConfig.EmailBuilder().build(),
                                             new AuthUI.IdpConfig.GoogleBuilder().build()))
@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity{
                 Glide.with(getApplicationContext())
                         .load(firebaseauth.getCurrentUser().getPhotoUrl())
                         .asBitmap()
-                        .error(R.drawable.restaurant)//asbitmap after load always.
+                        .error(R.drawable.ic_person_black_24dp)//asbitmap after load always.
                         .into(new SimpleTarget<Bitmap>() {
                             @Override
                             public void onResourceReady(Bitmap resource,
