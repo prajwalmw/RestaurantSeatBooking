@@ -107,6 +107,7 @@ public class BookingFragment extends Fragment {
                     projection,new int[]{R.id.prajwal_list_name});
             listView.setAdapter(simpleCursorAdapter);
             listView.setTextFilterEnabled(true);
+            Log.d("DATA", "CURSOR:: "+cursor.getCount());
         }
         else
         {
@@ -170,6 +171,7 @@ public class BookingFragment extends Fragment {
                             restaurantDatabaseHelper.delete
                                     (cursor.getInt(cursor.getColumnIndexOrThrow(RestaurantDatabaseHelper._id)));       //hint for update.
                             cursor=restaurantDatabaseHelper.getAll();
+                            //Log.d("DATA","CCC: "+cursor);
                             simpleCursorAdapter.swapCursor(cursor);
 
                             listView.setAdapter(simpleCursorAdapter);

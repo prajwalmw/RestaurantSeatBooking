@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class RestaurantDatabaseHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 2;
-    public static final String DATABASE_NAME = "restaurant.db";
+    public static final String DATABASE_NAME = "Resto.db";
     public static SQLiteDatabase database;
 
     public static final String R_TABLE = "Restaurant_Data";
@@ -86,6 +86,8 @@ public class RestaurantDatabaseHelper extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM "+R_TABLE,null);
+        System.out.println(c);
+        Log.d("DATA","CURSOR: "+c);
         return c;
     }
 }
