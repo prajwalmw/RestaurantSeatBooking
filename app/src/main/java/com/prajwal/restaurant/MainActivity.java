@@ -234,6 +234,25 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder alertdialogBuilder = new AlertDialog.Builder(this);
+        alertdialogBuilder.setMessage("Are you sure you want to EXIT ?");
+        alertdialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i)
+
+            {
+                moveTaskToBack(true);
+                // finish();
+            }
+        });
+        alertdialogBuilder.setNegativeButton("No", null);
+
+        AlertDialog alertDialog = alertdialogBuilder.create();
+        alertDialog.show();
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
