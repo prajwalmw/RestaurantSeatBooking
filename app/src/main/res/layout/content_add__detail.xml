@@ -132,7 +132,7 @@
                 android:layout_alignBaseline="@+id/in_time_edit"
                 android:layout_alignEnd="@+id/type"
                 android:layout_weight="0.30"
-                android:text="In-Time:"
+                android:text="Time:"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -146,7 +146,7 @@
                 android:layout_row="2"
                 android:layout_weight="0.70"
                 android:ems="10"
-                android:hint="User's In-Time"
+                android:hint="Enter your In-Time"
                 android:inputType="datetime"
                 />
 
