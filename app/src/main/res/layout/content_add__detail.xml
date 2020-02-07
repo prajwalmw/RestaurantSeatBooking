@@ -9,6 +9,13 @@
     tools:context=".Add_Detail"
     tools:showIn="@layout/activity_add__detail">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/niki"
+        android:alpha="0.09"
+        />
+
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="match_parent"

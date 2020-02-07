@@ -79,7 +79,6 @@ public class Add_Detail extends AppCompatActivity {
         bundle = getIntent().getExtras();
         user_id = bundle.getString("user_edit_id", null);
         add = bundle.getBoolean("new");
-
         name = findViewById(R.id.name_edit);
         phone = findViewById(R.id.phone_edit);
         seats = findViewById(R.id.seats_edit);
@@ -341,7 +340,7 @@ Log.d("DB","VALUES: "+values);
                     Toast.makeText(getApplicationContext(), "Enter correct number of seats", Toast.LENGTH_LONG).show();
                 }
                     else {
-                    Toast.makeText(getApplicationContext(), "Seats Full", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Seats Full! There are seats on waiting!", Toast.LENGTH_LONG).show();
                 }
             }
             else {
