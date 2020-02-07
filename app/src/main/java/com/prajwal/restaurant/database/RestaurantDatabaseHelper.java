@@ -92,4 +92,14 @@ public class RestaurantDatabaseHelper extends SQLiteOpenHelper {
         Log.d("DATA","CURSOR: "+c);
         return c;
     }
+
+    public Cursor get_All_UserData(String email)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.query(R_TABLE,null,R_LOGIN_EMAIL + "=?",
+                new String[]{email},null,null,null);
+        System.out.println(c);
+        Log.d("DATA","CURSOR: "+c);
+        return c;
+    }
 }

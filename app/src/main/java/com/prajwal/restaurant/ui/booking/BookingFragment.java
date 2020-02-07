@@ -152,11 +152,11 @@ public class BookingFragment extends Fragment {
 
                 sharedPrefs = getContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
                 editor_user = sharedPrefs.edit();
-                String email = sharedPrefs.getString("email","no email");
+                email = sharedPrefs.getString("email","no email");
 
                 Log.d("TAG","email is "+email);
-                if("nikita.narayan98@gmail.com".equalsIgnoreCase(email))
-                {
+               // if("nikita.narayan98@gmail.com".equalsIgnoreCase(email))
+                //{
                     AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
                     ad.setTitle("Delete");
                     ad.setMessage("Are you sure you want to delete ? ");
@@ -170,9 +170,18 @@ public class BookingFragment extends Fragment {
                             //c = db.getAll();
                             restaurantDatabaseHelper.delete
                                     (cursor.getInt(cursor.getColumnIndexOrThrow(RestaurantDatabaseHelper._id)));       //hint for update.
-                            cursor=restaurantDatabaseHelper.getAll();
-                            //Log.d("DATA","CCC: "+cursor);
-                            simpleCursorAdapter.swapCursor(cursor);
+                            if("nikita.narayan98@gmail.com".equalsIgnoreCase(email))
+                            {
+                                cursor=restaurantDatabaseHelper.getAll();
+                                //Log.d("DATA","CCC: "+cursor);
+                                simpleCursorAdapter.swapCursor(cursor);
+                            }
+                            else
+                            {
+                                cursor=restaurantDatabaseHelper.get_All_UserData(email);
+                                //Log.d("DATA","CCC: "+cursor);
+                                simpleCursorAdapter.swapCursor(cursor);
+                            }
 
                             listView.setAdapter(simpleCursorAdapter);
                             //cAdapter.notifyDataSetChanged();
@@ -188,11 +197,11 @@ public class BookingFragment extends Fragment {
                     });
 
                     ad.show();
-                }
-                else
-                {
+               // }
+              //  else
+              //  {
                     //Do nothing
-                }
+              //  }
                 return  true;
 
             }
