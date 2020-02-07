@@ -158,11 +158,11 @@ public class BookingFragment extends Fragment {
                // if("nikita.narayan98@gmail.com".equalsIgnoreCase(email))
                 //{
                     AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
-                    ad.setTitle("Delete");
-                    ad.setMessage("Are you sure you want to delete ? ");
+                    ad.setTitle("Cancel Booking");
+                    ad.setMessage("Are you sure you want to cancel the booking? ");
 
                     final int pos = position;
-                    ad.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    ad.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             cursor.moveToPosition(pos);
@@ -189,7 +189,7 @@ public class BookingFragment extends Fragment {
                         }
                     });
 
-                    ad.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    ad.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
