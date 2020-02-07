@@ -83,27 +83,33 @@ public class ReviewFragment extends Fragment {
 
             @Override
             public void onClick(View arg0) {
-                //Getting the rating and displaying it on the toast
-                String rating=String.valueOf(ratingBar.getRating());
-                Toast.makeText(getContext(), rating, Toast.LENGTH_LONG).show();
+                if (ratingBar.getRating() != 0) {
+                    //Getting the rating and displaying it on the toast
+                    String rating = String.valueOf(ratingBar.getRating());
+                    Toast.makeText(getContext(), rating, Toast.LENGTH_LONG).show();
 
-                String username1 = sharedPrefs.getString("username","Username");
+                    String username1 = sharedPrefs.getString("username", "Username");
 
-                ContentValues values = new ContentValues();
-                values.put(R_USERNAME, username1);
-                values.put(R_MARKS, rating);
+                    ContentValues values = new ContentValues();
+                    values.put(R_USERNAME, username1);
+                    values.put(R_MARKS, rating);
 
-                rowInserted = sqLiteDatabase.insert(R_REVIEW, null, values);
-                if (rowInserted != -1) {
-                    Toast.makeText(getContext(), "Review Submitted Successfully!", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(getContext(), MainActivity.class);
-                    startActivity(i);
+                    rowInserted = sqLiteDatabase.insert(R_REVIEW, null, values);
+                    if (rowInserted != -1) {
+                        Toast.makeText(getContext(), "Review Submitted Successfully!", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(getContext(), MainActivity.class);
+                        startActivity(i);
+                    } else {
+                        Toast.makeText(getContext(), "Something wrong", Toast.LENGTH_LONG).show();
+                    }
+
                 }
-                else {
-                    Toast.makeText(getContext(), "Something wrong", Toast.LENGTH_LONG).show();
+                else
+                {
+                    Toast.makeText(getContext(), "Please give a rating before submitting!", Toast.LENGTH_SHORT).show();
                 }
-
             }
+
 
         });
     }
