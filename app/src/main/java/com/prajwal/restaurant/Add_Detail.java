@@ -1,5 +1,6 @@
 package com.prajwal.restaurant;
 
+import android.app.TimePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -26,21 +27,29 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import static com.prajwal.restaurant.database.RestaurantDatabaseHelper.R_AVAILABLE;
 import static com.prajwal.restaurant.database.RestaurantDatabaseHelper.R_CONTACT;
+import static com.prajwal.restaurant.database.RestaurantDatabaseHelper.R_IN_TIME;
 import static com.prajwal.restaurant.database.RestaurantDatabaseHelper.R_LOGIN_EMAIL;
 import static com.prajwal.restaurant.database.RestaurantDatabaseHelper.R_NAME;
 import static com.prajwal.restaurant.database.RestaurantDatabaseHelper.R_SEATS;
 import static com.prajwal.restaurant.database.RestaurantDatabaseHelper.R_TABLE;
 
 public class Add_Detail extends AppCompatActivity {
-    EditText name, phone, seats;
+    EditText name, phone, seats, in_time;
     EditText available_seats;
-    String name_text, phone_text, seats_text, available_text;
+    String name_text, phone_text, seats_text, available_text, in_time_text;
     RestaurantDatabaseHelper restaurantDatabaseHelper;
     SQLiteDatabase sqLiteDatabase;
     Bundle bundle;
@@ -50,6 +59,14 @@ public class Add_Detail extends AppCompatActivity {
     SharedPreferences sharedPrefs;
     SharedPreferences.Editor editor_user;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
+    static final int TIME_PICKER_ID = 2222;
+    Calendar c;
+    private int year;
+    private int month;
+    private int day;
+    int hour,minute;
+    Date testDate1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +84,80 @@ public class Add_Detail extends AppCompatActivity {
         phone = findViewById(R.id.phone_edit);
         seats = findViewById(R.id.seats_edit);
         available_seats = findViewById(R.id.available_seats);
+        in_time = findViewById(R.id.in_time_edit);
 
         sharedPrefs = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
         editor_user = sharedPrefs.edit();
         String email = sharedPrefs.getString("email","no email");
+
+        //calendar
+        c = Calendar.getInstance();
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);          //Date
+        day = c.get(Calendar.DAY_OF_MONTH);
+        c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+        //Time
+        hour = c.get(Calendar.HOUR_OF_DAY);
+        minute = c.get(Calendar.MINUTE);
+        //Time end
+
+        in_time.setFocusable(false);
+        in_time.setInputType(InputType.TYPE_NULL);
+        in_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final TimePickerDialog dia = new TimePickerDialog
+                        (Add_Detail.this, new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute_new) {
+                                hour = hourOfDay;
+                                minute = minute_new;
+
+                                year = c.get(Calendar.YEAR);
+                                month = c.get(Calendar.MONTH);          //Date
+                                day = c.get(Calendar.DAY_OF_MONTH);
+
+            /*final int h_diff = c.get(Calendar.HOUR_OF_DAY);
+            final int m_diff = c.get(Calendar.MINUTE);
+            final Calendar today = Calendar.getInstance();*/
+
+
+                                String am_pm;
+                                if (hour > 12)
+                                {
+                                    hour = hour - 12;
+                                    am_pm = "PM";
+                                } else {
+                                    am_pm = "AM";
+                                }
+
+
+                                StringBuilder dateValue_1 = new StringBuilder().append(day)
+                                        .append("-").append(month + 1).append("-").append(year)
+                                        .append(" ").append(hour).append(":").append(minute).append(" ").append(am_pm);
+
+                                //Date date = new Date();
+                                SimpleDateFormat sdf1234 = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+                                String abs12 = dateValue_1.toString();
+
+                                // testDate1 = null;
+                                try {
+                                    testDate1 = sdf1234.parse(abs12);
+                                } catch (ParseException e) {
+
+                                    e.printStackTrace();
+                                }
+                                //String strDateFormat = "hh:mm:ss a";
+
+                                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+                                String formattedDate= dateFormat.format(testDate1);
+
+                                in_time.setText(formattedDate);
+                            }
+                        }, hour, minute, false);
+               dia.show();
+            }
+        });
 
         Log.d("TAG","email is "+email);
 
@@ -95,7 +182,7 @@ public class Add_Detail extends AppCompatActivity {
 
                 Log.d("TAG","email is "+email);
 
-                if("nikita.narayan98@gmail.com".equalsIgnoreCase(email) && name.getText().toString().equals("") && phone.getText().toString().equals("")
+                if("nikita.narayan98@gmail.com".equalsIgnoreCase(email) && name.getText().toString().equals("") && phone.getText().toString().equals("")&& in_time.getText().toString().equals("")
                         && seats.getText().toString().equals("") && !available_seats.getText().toString().equals("")  && !sharedPrefs.getString("available","").equalsIgnoreCase(available_seats.getText().toString()))
                 {
                     editor_user.putString("available",available_seats.getText().toString());
@@ -107,7 +194,7 @@ public class Add_Detail extends AppCompatActivity {
                     //insertData();
                 }
 
-                else if("nikita.narayan98@gmail.com".equalsIgnoreCase(email) && !name.getText().toString().equals("") && !phone.getText().toString().equals("")
+                else if("nikita.narayan98@gmail.com".equalsIgnoreCase(email) && !name.getText().toString().equals("") && !phone.getText().toString().equals("") && !in_time.getText().toString().equals("")
                         && !seats.getText().toString().equals("") && !available_seats.getText().toString().equals(""))
                 {
                     editor_user.putString("available",available_seats.getText().toString());
@@ -119,7 +206,7 @@ public class Add_Detail extends AppCompatActivity {
                     insertData();
                 }
 
-                else if("nikita.narayan98@gmail.com".equalsIgnoreCase(email) && name.getText().toString().equals("") && phone.getText().toString().equals("")
+                else if("nikita.narayan98@gmail.com".equalsIgnoreCase(email) && name.getText().toString().equals("") && phone.getText().toString().equals("") && in_time.getText().toString().equals("")
                         && seats.getText().toString().equals("") && !available_seats.getText().toString().equals("") && sharedPrefs.getString("available","").equalsIgnoreCase(available_seats.getText().toString()))
                 {
                     if (name.getText().toString().equals("")) {
@@ -131,7 +218,9 @@ public class Add_Detail extends AppCompatActivity {
                     if (seats.getText().toString().equals("")) {
                         seats.setError("Seats is mandatory!");
                     }
-
+                    if (in_time.getText().toString().equals("")) {
+                        in_time.setError("In-Time is mandatory!");
+                    }
                     if (available_seats.getText().toString().equals("")) {
                         available_seats.setError("Contact Manager");
                         Toast.makeText(getApplicationContext(), "Contact Manager", Toast.LENGTH_LONG).show();
@@ -157,11 +246,13 @@ public class Add_Detail extends AppCompatActivity {
         }
     }
 
+
     public void insertData() {
         name_text = name.getText().toString();
         phone_text = phone.getText().toString();
         //PhoneNumberUtils.formatNumber(phone_text);
         seats_text = seats.getText().toString();
+        in_time_text = in_time.getText().toString();
         available_text = available_seats.getText().toString();
         String emailnew = sharedPrefs.getString("email","no email");
 
@@ -173,10 +264,12 @@ public class Add_Detail extends AppCompatActivity {
         values.put(R_CONTACT, phone_text);
         values.put(R_SEATS, seats_text);
         values.put(R_LOGIN_EMAIL, emailnew);
+        values.put(R_IN_TIME, in_time_text);
         values.put(R_AVAILABLE, available_text);
 Log.d("DB","VALUES: "+values);
 
             if (!name.getText().toString().equals("") && !phone.getText().toString().equals("")
+                    && !in_time.getText().toString().equals("")
                 && !seats.getText().toString().equals("") && !available_seats.getText().toString().equals("")) {
 
                 int val1 = Integer.parseInt(seats.getText().toString());
@@ -261,6 +354,9 @@ Log.d("DB","VALUES: "+values);
                     if (seats.getText().toString().equals("")) {
                         seats.setError("Seats is mandatory!");
                     }
+                if (in_time.getText().toString().equals("")) {
+                    in_time.setError("In-Time is mandatory!");
+                }
 
                 if (available_seats.getText().toString().equals("")) {
                     available_seats.setError("Contact Manager");
@@ -280,7 +376,8 @@ Log.d("DB","VALUES: "+values);
         RestaurantDatabaseHelper restaurantDatabaseHelper = new RestaurantDatabaseHelper(this);
         SQLiteDatabase sqLiteDatabase = restaurantDatabaseHelper.getWritableDatabase();
 
-        Cursor cursor = sqLiteDatabase.query(R_TABLE, new String[]{R_NAME,R_CONTACT,R_SEATS,R_AVAILABLE},
+        Cursor cursor = sqLiteDatabase.query(R_TABLE, new String[]{R_NAME,R_CONTACT,R_SEATS,
+                        R_AVAILABLE,R_IN_TIME},
                 RestaurantDatabaseHelper._id+"=?", new String[]{str}, null, null, null);
 
         if (cursor.moveToFirst()) {
@@ -288,6 +385,7 @@ Log.d("DB","VALUES: "+values);
                 name.setText(cursor.getString(cursor.getColumnIndexOrThrow(R_NAME)));
                 phone.setText(cursor.getString(cursor.getColumnIndexOrThrow(R_CONTACT)));
                 seats.setText(cursor.getString(cursor.getColumnIndexOrThrow(R_SEATS)));
+                in_time.setText(cursor.getString(cursor.getColumnIndexOrThrow(R_IN_TIME)));
                 editor_user.putString("seats_enter", seats.getText().toString());
                 editor_user.apply();
             }
@@ -336,6 +434,7 @@ Log.d("DB","VALUES: "+values);
             name.setEnabled(false);
             phone.setEnabled(false);
             seats.setEnabled(false);
+            in_time.setEnabled(false);
             available_seats.requestFocus();
             available_seats.setFocusableInTouchMode(true);
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

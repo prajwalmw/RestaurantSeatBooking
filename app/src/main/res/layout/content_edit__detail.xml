@@ -65,6 +65,34 @@
                     />
 
                 <TextView
+                    android:id="@+id/intime_layout"
+                    style="?android:listSeparatorTextViewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/name_data"
+                    android:layout_marginTop="28dp"
+                    android:paddingVertical="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="In-Time :"
+                    android:textStyle="bold"
+                    android:textSize="20dp"/>
+
+                <TextView
+                    android:id="@+id/intime_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/intime_layout"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toEndOf="@+id/intime_layout"
+                    android:layout_toRightOf="@+id/intime_layout"
+                    android:paddingVertical="20dp"
+                    android:textSize="20dp"
+                    />
+
+                <TextView
                     android:id="@+id/phone_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

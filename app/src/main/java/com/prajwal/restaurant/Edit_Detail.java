@@ -24,9 +24,9 @@ public class Edit_Detail extends AppCompatActivity {
     BookingFragment bookingFragment = new BookingFragment();
     Intent i_edit;
 
-    TextView txt,et1,et2,et3;
+    TextView txt,et1,et2,et3,et4;
     FloatingActionButton f_edit;
-    String id_s, mobile_S, seat_S;
+    String id_s, mobile_S, seat_S, intime_s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,8 @@ public class Edit_Detail extends AppCompatActivity {
                         RestaurantDatabaseHelper.R_NAME,
                         RestaurantDatabaseHelper._id,
                         RestaurantDatabaseHelper.R_CONTACT,
-                        RestaurantDatabaseHelper.R_SEATS
+                        RestaurantDatabaseHelper.R_SEATS,
+                        RestaurantDatabaseHelper.R_IN_TIME
                 };
 
 
@@ -71,6 +72,8 @@ public class Edit_Detail extends AppCompatActivity {
         et1 = (TextView) findViewById(R.id.name_data);
         et2 = (TextView) findViewById(R.id.phone_data);
         et3 = (TextView) findViewById(R.id.seats_data);
+        et4 = (TextView) findViewById(R.id.intime_data);
+
 
         f_edit = findViewById(R.id.fab);
         f_edit.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +91,7 @@ public class Edit_Detail extends AppCompatActivity {
             int column_name = c1.getColumnIndex(RestaurantDatabaseHelper.R_NAME);
             int column_contact = c1.getColumnIndex(RestaurantDatabaseHelper.R_CONTACT);
             int column_seats = c1.getColumnIndex(RestaurantDatabaseHelper.R_SEATS);
+            int column_intime = c1.getColumnIndex(RestaurantDatabaseHelper.R_IN_TIME);
 
             while(c1.moveToNext()) {
                 int current_id = c1.getInt(column_index);
@@ -98,12 +102,16 @@ public class Edit_Detail extends AppCompatActivity {
                 int current_seats = c1.getInt(column_seats);
                 seat_S = String.valueOf(current_seats);
 
+                String current_in_time = c1.getString(column_intime);
+                intime_s = String.valueOf(current_in_time);
+
                 //my changes
 
                 txt.setText("ID : " + id_s);
                 et1.setText(current_name);
                 et2.setText(mobile_S);
                 et3.setText(seat_S);
+                et4.setText(intime_s);
             }
         } catch (Exception e) {
             //txt.setText("HELLO");
