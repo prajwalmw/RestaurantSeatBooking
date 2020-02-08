@@ -97,7 +97,7 @@ public class Edit_Detail extends AppCompatActivity {
                 int current_id = c1.getInt(column_index);
                 id_s = String.valueOf(current_id);
                 String current_name = c1.getString(column_name);
-                int current_contact = c1.getInt(column_contact);
+                long current_contact = c1.getLong(column_contact);
                 mobile_S = String.valueOf(current_contact);
                 int current_seats = c1.getInt(column_seats);
                 seat_S = String.valueOf(current_seats);

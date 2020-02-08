@@ -66,6 +66,7 @@ public class Add_Detail extends AppCompatActivity {
     private int day;
     int hour,minute;
     Date testDate1;
+    long phone_long_type;
 
 
     @Override
@@ -181,6 +182,12 @@ public class Add_Detail extends AppCompatActivity {
 
                 Log.d("TAG","email is "+email);
 
+                //phone number to long datatype.
+                if (!phone.getText().toString().trim().equals(""))
+                {
+                    phone_long_type = Long.parseLong(phone.getText().toString().trim());
+                }
+
                 if("nikita.narayan98@gmail.com".equalsIgnoreCase(email) && name.getText().toString().equals("") && phone.getText().toString().equals("")&& in_time.getText().toString().equals("")
                         && seats.getText().toString().equals("") && !available_seats.getText().toString().equals("")  && !sharedPrefs.getString("available","").equalsIgnoreCase(available_seats.getText().toString()))
                 {
@@ -248,7 +255,7 @@ public class Add_Detail extends AppCompatActivity {
 
     public void insertData() {
         name_text = name.getText().toString();
-        phone_text = phone.getText().toString();
+       // phone_text = phone.getText().toString();
         //PhoneNumberUtils.formatNumber(phone_text);
         seats_text = seats.getText().toString();
         in_time_text = in_time.getText().toString();
@@ -260,7 +267,7 @@ public class Add_Detail extends AppCompatActivity {
 
         ContentValues values = new ContentValues();
         values.put(R_NAME, name_text);
-        values.put(R_CONTACT, phone_text);
+        values.put(R_CONTACT, phone_long_type);
         values.put(R_SEATS, seats_text);
         values.put(R_LOGIN_EMAIL, emailnew);
         values.put(R_IN_TIME, in_time_text);
