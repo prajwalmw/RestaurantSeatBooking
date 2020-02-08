@@ -16,18 +16,25 @@
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_event_note_black_24dp"
             android:title="My Bookings" />
+
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_info_outline_black_24dp"
             android:title="About Us" />
 
-            <item
-                android:id="@+id/nav_review"
-                android:icon="@drawable/ic_sentiment_satisfied_black_24dp"
-                android:title="Review" />
+    <item
+        android:id="@+id/nav_menu"
+        android:icon="@drawable/ic_local_dining_black_24dp"
+        android:title="Menu/Gallery" />
 
-               <item
-                android:id="@+id/nav_logout"
-                android:icon="@drawable/ic_power_settings_new_black_24dp"
-                android:title="Logout" />
+    <item
+        android:id="@+id/nav_review"
+        android:icon="@drawable/ic_sentiment_satisfied_black_24dp"
+        android:title="Review" />
+
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_power_settings_new_black_24dp"
+        android:title="Logout" />
+
 </menu>

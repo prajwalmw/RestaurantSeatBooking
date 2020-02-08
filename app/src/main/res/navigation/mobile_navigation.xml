@@ -27,7 +27,13 @@
         android:id="@+id/nav_slideshow"
         android:name="com.prajwal.restaurant.ui.aboutUs.AboutUsFragment"
         android:label="About Us"
-        tools:layout="@layout/fragment_aboutUs" />
+        tools:layout="@layout/fragment_about_us" />
+
+    <fragment
+        android:id="@+id/nav_menu"
+        android:name="com.prajwal.restaurant.ui.menu.MenuGalleryFragment"
+        android:label="Menu/Gallery"
+        tools:layout="@layout/fragment_menu_item" />
 
     <fragment
         android:id="@+id/nav_review"
