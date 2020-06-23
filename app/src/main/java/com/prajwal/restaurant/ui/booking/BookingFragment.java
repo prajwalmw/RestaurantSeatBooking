@@ -97,9 +97,8 @@ public class BookingFragment extends Fragment {
 
 
         Log.d("TAG","email BOYS"+email);
-        if("nikita.narayan98@gmail.com".equalsIgnoreCase(email))
+        if("prajwalwaingankar@gmail.com".equalsIgnoreCase(email))
         {
-
 
             cursor = sqLiteDatabase.query(RestaurantDatabaseHelper.R_TABLE, projection, null, null, null, null, null);
 
@@ -155,7 +154,7 @@ public class BookingFragment extends Fragment {
                 email = sharedPrefs.getString("email","no email");
 
                 Log.d("TAG","email is "+email);
-               // if("nikita.narayan98@gmail.com".equalsIgnoreCase(email))
+               // if("prajwalwaingankar@gmail.com".equalsIgnoreCase(email))
                 //{
                     AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
                     ad.setTitle("Cancel Booking");
@@ -170,7 +169,7 @@ public class BookingFragment extends Fragment {
                             //c = db.getAll();
                             restaurantDatabaseHelper.delete
                                     (cursor.getInt(cursor.getColumnIndexOrThrow(RestaurantDatabaseHelper._id)));       //hint for update.
-                            if("nikita.narayan98@gmail.com".equalsIgnoreCase(email))
+                            if("prajwalwaingankar@gmail.com".equalsIgnoreCase(email))
                             {
                                 cursor=restaurantDatabaseHelper.getAll();
                                 //Log.d("DATA","CCC: "+cursor);
