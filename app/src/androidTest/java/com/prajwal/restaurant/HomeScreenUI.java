@@ -24,9 +24,8 @@ import static androidx.test.espresso.assertion.ViewAssertions.*;
  * Github: prajwalmw
  */
 
-   @RunWith(AndroidJUnit4.class)
-   @LargeTest
-public class MainActivity_UITest {
+@RunWith(AndroidJUnit4.class)
+public class HomeScreenUI {
 /*    1. ViewMatcher
     2. ViewAction
     3. ViewAssertion */
@@ -39,7 +38,7 @@ public class MainActivity_UITest {
     public void HomeScreen_UI_Testing()
     {
         Espresso.onView(withId(R.id.image_resto))
-                .check(ViewAssertions.matches(ViewMatchers.withContentDescription("logos")));
+                .check(ViewAssertions.matches(ViewMatchers.withContentDescription("drawable/niki")));
 
         Espresso.onView(withId(R.id.text_description))
                 .check(matches(ViewMatchers.withText("Always on time!\n\nExpect the best experience from us. \nThe app is designed to reduce your waiting time and provide you the best experience")));
