@@ -20,6 +20,7 @@
        android:layout_weight="5"
        android:background="#FFFFFF"
        android:paddingHorizontal="10sp"
+       android:contentDescription="logos"
        android:src="@drawable/niki"/>
 
     <TextView
