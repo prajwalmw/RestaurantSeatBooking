@@ -78,8 +78,12 @@ public class Add_Detail extends AppCompatActivity {
 
 
         bundle = getIntent().getExtras();
-        user_id = bundle.getString("user_edit_id", null);
-        add = bundle.getBoolean("new");
+        if(bundle != null)
+        {
+            user_id = bundle.getString("user_edit_id", null);
+            add = bundle.getBoolean("new");
+        }
+
         name = findViewById(R.id.name_edit);
         phone = findViewById(R.id.phone_edit);
         seats = findViewById(R.id.seats_edit);
@@ -247,9 +251,13 @@ public class Add_Detail extends AppCompatActivity {
             }
         });
 
-        if (bundle.containsKey("user_edit_id")) {
-            setscreen(user_id);
+        if(bundle != null)
+        {
+            if (bundle.containsKey("user_edit_id")) {
+                setscreen(user_id);
+            }
         }
+
     }
 
 
@@ -284,12 +292,16 @@ Log.d("DB","VALUES: "+values);
                 if (val1 <= val2 && val2 != 0 && val1 != 0) {
                     rowInserted = -1;
 
-                    if (bundle.containsKey("new")) {
-                        rowInserted = sqLiteDatabase.insert(R_TABLE, null, values);
-                        Intent intent = new Intent(Add_Detail.this, Booking_Fragment_Extends.class);
-                        startActivity(intent);
-                        finish(); //wont come back to the add form screen.
+                    if(bundle != null)
+                    {
+                        if (bundle.containsKey("new")) {
+                            rowInserted = sqLiteDatabase.insert(R_TABLE, null, values);
+                            Intent intent = new Intent(Add_Detail.this, Booking_Fragment_Extends.class);
+                            startActivity(intent);
+                            finish(); //wont come back to the add form screen.
+                        }
                     }
+
 
                     if (rowInserted != -1)
                     {
@@ -303,44 +315,48 @@ Log.d("DB","VALUES: "+values);
                     else
                         //Toast.makeText(getApplicationContext(), "Something wrong", Toast.LENGTH_LONG).show();
 
-                    if (bundle.containsKey("user_edit_id")) {
-                        //setscreen(user_id);
-                        Log.d("id", "PResent_id" + user_id);
+                    if(bundle != null)
+                    {
+                        if (bundle.containsKey("user_edit_id")) {
+                            //setscreen(user_id);
+                            Log.d("id", "PResent_id" + user_id);
 
-                        //code to edit the available seats logic on adding less than og value
-                        int i = Integer.parseInt(sharedPrefs.getString("seats_enter",""));
-                        Log.d("value", "i " + i);
-                        int i2 = Integer.parseInt(seats_text);
-                        Log.d("value", "i2 " + i2);
-                        if(i >= i2)
-                        {
-                            int a1 = i - i2;
-                            Log.d("value", "a1 " + a1);
-                            int a2 = Integer.parseInt(available_text) + a1;
-                            Log.d("value", "a2 " + a2);
-                            available_text = String.valueOf(a2);
-                            Log.d("value", "available " + available_text);
-                            editor_user.putString("available",available_text);
-                            editor_user.apply();
+                            //code to edit the available seats logic on adding less than og value
+                            int i = Integer.parseInt(sharedPrefs.getString("seats_enter",""));
+                            Log.d("value", "i " + i);
+                            int i2 = Integer.parseInt(seats_text);
+                            Log.d("value", "i2 " + i2);
+                            if(i >= i2)
+                            {
+                                int a1 = i - i2;
+                                Log.d("value", "a1 " + a1);
+                                int a2 = Integer.parseInt(available_text) + a1;
+                                Log.d("value", "a2 " + a2);
+                                available_text = String.valueOf(a2);
+                                Log.d("value", "available " + available_text);
+                                editor_user.putString("available",available_text);
+                                editor_user.apply();
+                                sqLiteDatabase.update(R_TABLE, values, "_id=" + user_id, null);
+                                finish();
+                            }
+                            else
+                            {
+                                int a1 = i2 - i;
+                                Log.d("value", "a1 " + a1);
+                                int a2 = Integer.parseInt(available_text) - a1;
+                                Log.d("value", "a2 " + a2);
+                                available_text = String.valueOf(a2);
+                                Log.d("value", "available " + available_text);
+                                editor_user.putString("available",available_text);
+                                editor_user.apply();
+                                sqLiteDatabase.update(R_TABLE, values, "_id=" + user_id, null);
+                                finish();
+                            }
                             sqLiteDatabase.update(R_TABLE, values, "_id=" + user_id, null);
                             finish();
                         }
-                        else
-                        {
-                            int a1 = i2 - i;
-                            Log.d("value", "a1 " + a1);
-                            int a2 = Integer.parseInt(available_text) - a1;
-                            Log.d("value", "a2 " + a2);
-                            available_text = String.valueOf(a2);
-                            Log.d("value", "available " + available_text);
-                            editor_user.putString("available",available_text);
-                            editor_user.apply();
-                            sqLiteDatabase.update(R_TABLE, values, "_id=" + user_id, null);
-                            finish();
-                        }
-                        sqLiteDatabase.update(R_TABLE, values, "_id=" + user_id, null);
-                        finish();
                     }
+
                 }
                 else if(val1 == 0)
                 {

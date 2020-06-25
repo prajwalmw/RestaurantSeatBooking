@@ -26,7 +26,7 @@ import static androidx.test.espresso.assertion.ViewAssertions.*;
  */
 
 @RunWith(AndroidJUnit4.class)
-public class HomeScreenUI {
+public class HomeScreen_UITest {
 /*    1. ViewMatcher
     2. ViewAction
     3. ViewAssertion */
