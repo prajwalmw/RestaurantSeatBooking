@@ -66,12 +66,12 @@ public class Add_Detail_UITest {
                 .perform(replaceText(available_seats), closeSoftKeyboard())
                 .check(matches(withText(available_seats)));
 
-        try {
+       /* try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        
+        }*/
+
         Espresso.onView(withId(R.id.fab))
                 .perform(click());
     }
