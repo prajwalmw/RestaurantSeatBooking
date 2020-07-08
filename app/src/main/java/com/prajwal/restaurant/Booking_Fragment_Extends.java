@@ -14,9 +14,13 @@ public class Booking_Fragment_Extends extends AppCompatActivity {
         setContentView(R.layout.app_bar_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (savedInstanceState == null){
+
+
+        if (savedInstanceState == null)
+        {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.bar, new BookingFragment()).commit(); }
+                    .add(R.id.fff, new BookingFragment()).commit();
+        }
     }
 
 }
